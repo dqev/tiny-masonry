@@ -37,7 +37,7 @@
       text-align: center;
       max-width: 580px;
       margin: 0 auto;
-      padding: 72px 20px 40px;
+      padding: 72px 20px 48px;
     }
 
     h1.title {
@@ -115,104 +115,29 @@
 
     main.grid-wrap {
       width: 100%;
-      max-width: 1560px;
+      max-width: 1600px;
       margin: 0 auto;
-      padding: 0 20px 60px;
-    }
-
-    .grid-status {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      font-size: 12px;
-      color: #888888;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .grid-status-col {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #f5f5f5;
-      padding: 4px 10px;
-      border-radius: 9999px;
-      color: #333333;
-      font-weight: 530;
+      padding: 0 20px 80px;
     }
 
     #grid {
       width: 100%;
     }
 
-    .card {
-      background: #f5f5f5;
-      border-radius: 6px;
-      overflow: hidden;
-      padding: 10px;
+    .img-card {
       width: 100%;
-      transition: background 0.15s ease;
-    }
-
-    .card:hover {
-      background: #eeeeee;
-    }
-
-    .card-media {
-      width: 100%;
-      border-radius: 4px;
+      border-radius: 22px;
       overflow: hidden;
       background: #e7e7e7;
-      position: relative;
+      display: block;
     }
 
-    .card-media img {
+    .img-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      border-radius: 4px;
-      transition: opacity 0.2s ease;
-    }
-
-    .card-body {
-      padding: 10px 4px 2px;
-    }
-
-    .card-title {
-      font-size: 14px;
-      line-height: 18px;
-      font-weight: 530;
-      color: #000000;
-      margin-bottom: 4px;
-    }
-
-    .card-desc {
-      font-size: 13px;
-      line-height: 18px;
-      font-weight: 470;
-      color: #666666;
-      margin-bottom: 8px;
-    }
-
-    .card-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      color: #999999;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .card-tag {
-      background: #e7e7e7;
-      color: #555555;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 530;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      border-radius: 22px;
     }
   </style>
 </head>
@@ -236,11 +161,6 @@
   </header>
 
   <main class="grid-wrap">
-    <div class="grid-status">
-      <span class="grid-status-col" id="colInfo">Responsive layout</span>
-      <span id="cardCount">Loading items...</span>
-    </div>
-
     <div id="grid"></div>
   </main>
 
@@ -252,105 +172,64 @@
   </script>
 
   <script>
-    // Sample data with diverse random image dimensions and text content
-    var galleryData = [
-      { w: 600, h: 420, title: 'Nordic Horizon', desc: 'Minimalist coast with natural gradient and low morning fog.', tag: 'landscape', id: 10 },
-      { w: 500, h: 680, title: 'Brutalist Concrete', desc: 'Sharp geometric angles and monolithic shadows under direct sun.', tag: 'architecture', id: 16 },
-      { w: 550, h: 360, title: 'Alpine Ridge', desc: 'Snow covered ridgelines stretching into crisp winter daylight.', tag: 'nature', id: 28 },
-      { w: 480, h: 620, title: 'Urban Geometry', desc: 'Steel and glass facade reflecting morning commuter patterns.', tag: 'urban', id: 37 },
-      { w: 520, h: 520, title: 'Studio Still Life', desc: 'Neutral ceramic vessels positioned with balanced negative space.', tag: 'minimal', id: 42 },
-      { w: 600, h: 780, title: 'Dune Patterns', desc: 'Wind sculpted ridges forming fluid rhythmic shadows across sand.', tag: 'desert', id: 54 },
-      { w: 540, h: 340, title: 'Forest Canopy', desc: 'Muted cedar branches filtering high overcast ambient daylight.', tag: 'nature', id: 63 },
-      { w: 500, h: 640, title: 'Subway Portal', desc: 'Industrial tile architecture with deep symmetrical lines.', tag: 'urban', id: 71 },
-      { w: 520, h: 400, title: 'Monochrome Wave', desc: 'High contrast water texture breaking along volcanic shoreline.', tag: 'ocean', id: 82 },
-      { w: 460, h: 590, title: 'Architectural Void', desc: 'Interior courtyard opening up toward open sky with raw concrete.', tag: 'architecture', id: 93 },
-      { w: 580, h: 380, title: 'Morning Plateau', desc: 'Gentle topographic elevations under quiet dawn atmosphere.', tag: 'landscape', id: 104 },
-      { w: 490, h: 670, title: 'Linear Facade', desc: 'Repetitive vertical louvers casting rhythmic linear shadows.', tag: 'design', id: 115 },
-      { w: 510, h: 480, title: 'Neutral Textures', desc: 'Textured linen and plaster surfaces catching soft diffused light.', tag: 'interior', id: 126 },
-      { w: 600, h: 740, title: 'High Desert Canyon', desc: 'Sheer vertical sandstone walls illuminated by reflected glow.', tag: 'landscape', id: 137 },
-      { w: 530, h: 370, title: 'Quiet Lake', desc: 'Still water surface reflecting distant tree lines and overcast skies.', tag: 'nature', id: 148 },
-      { w: 470, h: 610, title: 'Modular Structure', desc: 'Prefabricated architectural elements arranged in uniform grid.', tag: 'design', id: 159 },
-      { w: 520, h: 420, title: 'Granite Textures', desc: 'Close detail of ancient glacial granite weathering under coastal rain.', tag: 'texture', id: 170 },
-      { w: 480, h: 650, title: 'Staircase Ascent', desc: 'Spiraling concrete steps with unbroken handrail curve.', tag: 'architecture', id: 181 },
-      { w: 540, h: 350, title: 'Lowland Mist', desc: 'Morning condensation resting over field grasses and boundary lines.', tag: 'nature', id: 192 },
-      { w: 500, h: 580, title: 'City Intersection', desc: 'High angle view of street grid and crosswalk geometry.', tag: 'urban', id: 203 }
+    var imageItems = [
+      { w: 600, h: 420, id: 10 },
+      { w: 500, h: 720, id: 16 },
+      { w: 550, h: 380, id: 28 },
+      { w: 480, h: 640, id: 37 },
+      { w: 520, h: 520, id: 42 },
+      { w: 600, h: 820, id: 54 },
+      { w: 540, h: 360, id: 63 },
+      { w: 500, h: 660, id: 71 },
+      { w: 520, h: 420, id: 82 },
+      { w: 460, h: 620, id: 93 },
+      { w: 580, h: 390, id: 104 },
+      { w: 490, h: 700, id: 115 },
+      { w: 510, h: 510, id: 126 },
+      { w: 600, h: 760, id: 137 },
+      { w: 530, h: 380, id: 148 },
+      { w: 470, h: 630, id: 159 },
+      { w: 520, h: 440, id: 170 },
+      { w: 480, h: 680, id: 181 },
+      { w: 540, h: 360, id: 192 },
+      { w: 500, h: 600, id: 203 }
     ];
 
     var container = document.getElementById('grid');
-    var colInfoEl = document.getElementById('colInfo');
-    var cardCountEl = document.getElementById('cardCount');
-    var totalCards = 0;
+    var count = 0;
 
-    function createCardElement(item, index) {
+    function createImgCard(item) {
       var card = document.createElement('div');
-      card.className = 'card';
+      card.className = 'img-card';
       card.setAttribute('data-aspect-ratio', item.w + '/' + item.h);
-
-      var imgUrl = 'https://picsum.photos/id/' + item.id + '/' + Math.round(item.w / 1.5) + '/' + Math.round(item.h / 1.5);
-
-      var media = document.createElement('div');
-      media.className = 'card-media';
-      media.style.aspectRatio = item.w + ' / ' + item.h;
+      card.style.aspectRatio = item.w + ' / ' + item.h;
 
       var img = document.createElement('img');
-      img.src = imgUrl;
-      img.alt = item.title;
+      img.src = 'https://picsum.photos/id/' + item.id + '/' + Math.round(item.w / 1.4) + '/' + Math.round(item.h / 1.4);
+      img.alt = '';
       img.loading = 'lazy';
 
-      // Refresh layout if image load changes dimension
       img.addEventListener('load', function () {
         if (window.grid) {
           window.grid.refresh();
         }
       });
 
-      media.appendChild(img);
-
-      var body = document.createElement('div');
-      body.className = 'card-body';
-
-      var title = document.createElement('h3');
-      title.className = 'card-title';
-      title.textContent = item.title;
-
-      var desc = document.createElement('p');
-      desc.className = 'card-desc';
-      desc.textContent = item.desc;
-
-      var meta = document.createElement('div');
-      meta.className = 'card-meta';
-
-      var dims = document.createElement('span');
-      dims.textContent = item.w + ' x ' + item.h;
-
-      var tag = document.createElement('span');
-      tag.className = 'card-tag';
-      tag.textContent = item.tag;
-
-      meta.appendChild(dims);
-      meta.appendChild(tag);
-
-      body.appendChild(title);
-      body.appendChild(desc);
-      body.appendChild(meta);
-
-      card.appendChild(media);
-      card.appendChild(body);
-
+      card.appendChild(img);
       return card;
     }
 
-    // Seed initial batch of 20 cards
-    var initialFragment = document.createDocumentFragment();
-    galleryData.forEach(function (data, idx) {
-      totalCards++;
-      initialFragment.appendChild(createCardElement(data, totalCards));
+    // Seed initial 20 images
+    var frag = document.createDocumentFragment();
+    imageItems.forEach(function (item) {
+      count++;
+      frag.appendChild(createImgCard(item));
     });
-    container.appendChild(initialFragment);
+    container.appendChild(frag);
 
-    // Initialize tiny-masonry layout engine
+    // Initialize tiny-masonry grid
     var grid = Masonry.create('#grid', {
-      gap: 14,
+      gap: 16,
       columnsCountBreakPoints: {
         0: 1,
         480: 2,
@@ -364,53 +243,34 @@
 
     window.grid = grid;
 
-    function updateStatus(colCount, colWidth) {
-      if (colInfoEl) {
-        colInfoEl.textContent = colCount + ' columns (' + Math.round(colWidth) + 'px)';
-      }
-      if (cardCountEl) {
-        cardCountEl.textContent = totalCards + ' items';
-      }
-    }
-
-    // Listen to resize and layout events
-    grid.on('resize', function (info) {
-      updateStatus(info.colCount, info.colWidth);
-    });
-
-    grid.on('layoutComplete', function (info) {
-      updateStatus(info.colCount, info.colWidth);
-    });
-
     // Infinite scroll
     var isLoading = false;
-    function addMoreBatch(count) {
-      var newCards = [];
-      var frag = document.createDocumentFragment();
-      for (var i = 0; i < count; i++) {
-        var baseItem = galleryData[totalCards % galleryData.length];
-        totalCards++;
-        var newItem = {
-          w: baseItem.w,
-          h: baseItem.h,
-          title: baseItem.title + ' #' + totalCards,
-          desc: baseItem.desc,
-          tag: baseItem.tag,
-          id: ((baseItem.id + totalCards * 7) % 300) + 10
+    function loadMore(n) {
+      var newEls = [];
+      var batchFrag = document.createDocumentFragment();
+
+      for (var i = 0; i < n; i++) {
+        var base = imageItems[count % imageItems.length];
+        count++;
+        var nextItem = {
+          w: base.w,
+          h: base.h,
+          id: ((base.id + count * 9) % 300) + 10
         };
-        var cardEl = createCardElement(newItem, totalCards);
-        frag.appendChild(cardEl);
-        newCards.push(cardEl);
+        var el = createImgCard(nextItem);
+        batchFrag.appendChild(el);
+        newEls.push(el);
       }
-      container.appendChild(frag);
-      grid.addItems(newCards);
+
+      container.appendChild(batchFrag);
+      grid.addItems(newEls);
     }
 
     window.addEventListener('scroll', function () {
       if (isLoading) return;
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 400) {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 450) {
         isLoading = true;
-        addMoreBatch(10);
+        loadMore(10);
         setTimeout(function () {
           isLoading = false;
         }, 120);
