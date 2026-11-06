@@ -3,12 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tiny-masonry</title>
-  <meta name="description" content="Zero-dependency, fast masonry layout engine for JavaScript. Under 5KB gzipped." />
+  <title>tiny-masonry: Fast, Zero-Dependency JavaScript Masonry Grid</title>
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="tiny-masonry: Fast, Zero-Dependency JavaScript Masonry Grid" />
+  <meta name="description" content="Zero-dependency, ultra-lightweight (~5KB) JavaScript masonry layout engine. Responsive Pinterest-style waterfall layouts with virtual scrolling." />
+  <meta name="keywords" content="masonry, masonry grid, javascript masonry, waterfall layout, pinterest layout, virtual scroll, zero dependency, vanilla js, frontend, responsive grid" />
+  <meta name="author" content="Dev Chauhan" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="canonical" href="https://masonry.devchauhan.in" />
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logo.png" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://masonry.devchauhan.in/" />
+  <meta property="og:site_name" content="tiny-masonry" />
+  <meta property="og:title" content="tiny-masonry: Fast, Zero-Dependency JavaScript Masonry Grid" />
+  <meta property="og:description" content="Zero-dependency, ultra-lightweight (~5KB) JavaScript masonry layout engine. Responsive Pinterest-style waterfall layouts with virtual scrolling." />
+  <meta property="og:image" content="https://masonry.devchauhan.in/assets/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="tiny-masonry JavaScript library banner" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://masonry.devchauhan.in/" />
+  <meta name="twitter:title" content="tiny-masonry: Fast, Zero-Dependency JavaScript Masonry Grid" />
+  <meta name="twitter:description" content="Zero-dependency, ultra-lightweight (~5KB) JavaScript masonry layout engine. Responsive Pinterest-style waterfall layouts with virtual scrolling." />
+  <meta name="twitter:image" content="https://masonry.devchauhan.in/assets/og.png" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "tiny-masonry",
+    "operatingSystem": "Any",
+    "applicationCategory": "DeveloperApplication",
+    "description": "Zero-dependency, fast masonry layout engine for JavaScript. Under 5KB gzipped with responsive waterfall layout and virtual scrolling.",
+    "url": "https://masonry.devchauhan.in",
+    "downloadUrl": "https://www.npmjs.com/package/tiny-masonry",
+    "softwareVersion": "0.0.2",
+    "author": {
+      "@type": "Person",
+      "name": "Dev Chauhan",
+      "url": "https://github.com/dqev"
+    },
+    "license": "https://opensource.org/licenses/MIT"
+  }
+  </script>
+
   <style>
     @font-face {
       font-family: 'Inter';
-      src: url('InterVariable.woff2') format('woff2');
+      src: url('assets/InterVariable.woff2') format('woff2');
       font-weight: 100 900;
       font-style: normal;
       font-display: swap;
@@ -170,7 +222,7 @@
   <script src="https://unpkg.com/tiny-masonry/masonry.min.js"></script>
   <script>
     if (typeof Masonry === 'undefined') {
-      document.write('<script src="npm/masonry.min.js"><\/script>');
+      document.write('<script src="src/masonry.min.js"><\/script>');
     }
   </script>
 

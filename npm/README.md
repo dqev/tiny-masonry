@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/dqev/tiny-masonry/main/tiny-masonry.png" alt="tiny-masonry" width="280">
+  <img src="https://raw.githubusercontent.com/dqev/tiny-masonry/main/assets/tiny-masonry.png" alt="tiny-masonry" width="280">
 </p>
 
 Zero-dependency, fast, lightweight masonry grid layout library for modern browsers and Node.js.
