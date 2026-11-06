@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Masonry Demo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #fff;
+    padding: 20px;
+  }
+
+  #grid {
+    width: 100%;
+  }
+
+  .card {
+    background: #e7e7e7;
+    border-radius: 6px;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+
+<div id="grid"></div>
+
+<script src="masonry.js"></script>
+<script>
+  var heights = [120, 160, 200, 240, 280, 320, 180, 140, 260, 300];
+
+  function makeCard() {
+    var el = document.createElement('div');
+    el.className = 'card';
+    el.style.height = heights[Math.floor(Math.random() * heights.length)] + 'px';
+    return el;
+  }
+
+  function addBatch(n) {
+    var els = [];
+    for (var i = 0; i < n; i++) els.push(makeCard());
+    grid.addItems(els);
+  }
+
+  // seed initial cards
+  var container = document.getElementById('grid');
+  for (var i = 0; i < 20; i++) container.appendChild(makeCard());
+
+  var grid = Masonry.create('#grid', {
+    gap: 12,
+    columnsCountBreakPoints: { 0: 2, 600: 3, 900: 4, 1200: 5 },
+    transitionDuration: 0,
+    virtualRender: false
+  });
+
+  // infinite scroll with loading guard
+  var isLoading = false;
+  window.addEventListener('scroll', function () {
+    if (isLoading) return;
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 250) {
+      isLoading = true;
+      addBatch(10);
+      setTimeout(function () { isLoading = false; }, 80);
+    }
+  }, { passive: true });
+</script>
+</body>
+</html>

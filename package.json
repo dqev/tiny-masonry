@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "masonry-layout": "^4.2.2",
+    "react-responsive-masonry": "^2.9.0"
+  }
+}
