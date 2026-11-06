@@ -5,38 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>tiny-masonry: Fast, Zero-Dependency JavaScript Masonry Grid</title>
 
-  <!-- Primary Meta Tags -->
   <meta name="title" content="tiny-masonry: Fast, Zero-Dependency JavaScript Masonry Grid" />
-  <meta name="description" content="Zero-dependency, ultra-lightweight (~5KB) JavaScript masonry layout engine. Responsive Pinterest-style waterfall layouts with virtual scrolling." />
-  <meta name="keywords" content="masonry, masonry grid, javascript masonry, waterfall layout, pinterest layout, virtual scroll, zero dependency, vanilla js, frontend, responsive grid" />
+  <meta name="description" content="Zero-dependency, fast masonry layout engine for JavaScript. Under 5KB gzipped with Pinterest-style waterfall layout, responsive columns, and virtual scrolling without jQuery." />
+  <meta name="keywords" content="masonry, masonry grid, javascript masonry layout, waterfall grid, pinterest layout javascript, zero dependency masonry, vanilla js masonry, virtual scrolling grid, lightweight masonry, no jquery masonry, masonry alternative" />
   <meta name="author" content="Dev Chauhan" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#ffffff" />
   <link rel="canonical" href="https://masonry.devchauhan.in" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
-  <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/logo.png" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
 
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://masonry.devchauhan.in/" />
   <meta property="og:site_name" content="tiny-masonry" />
   <meta property="og:title" content="tiny-masonry: Fast, Zero-Dependency JavaScript Masonry Grid" />
-  <meta property="og:description" content="Zero-dependency, ultra-lightweight (~5KB) JavaScript masonry layout engine. Responsive Pinterest-style waterfall layouts with virtual scrolling." />
+  <meta property="og:description" content="Zero-dependency, fast masonry layout engine for JavaScript. Under 5KB gzipped with Pinterest-style waterfall layout, responsive columns, and virtual scrolling without jQuery." />
   <meta property="og:image" content="https://masonry.devchauhan.in/assets/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="tiny-masonry JavaScript library banner" />
 
-  <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://masonry.devchauhan.in/" />
   <meta name="twitter:title" content="tiny-masonry: Fast, Zero-Dependency JavaScript Masonry Grid" />
-  <meta name="twitter:description" content="Zero-dependency, ultra-lightweight (~5KB) JavaScript masonry layout engine. Responsive Pinterest-style waterfall layouts with virtual scrolling." />
+  <meta name="twitter:description" content="Zero-dependency, fast masonry layout engine for JavaScript. Under 5KB gzipped with Pinterest-style waterfall layout, responsive columns, and virtual scrolling without jQuery." />
   <meta name="twitter:image" content="https://masonry.devchauhan.in/assets/og.png" />
 
-  <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -269,7 +268,6 @@
       return localImages[Math.floor(Math.random() * localImages.length)];
     }
 
-    // Seed initial 24 images
     var frag = document.createDocumentFragment();
     for (var i = 0; i < 24; i++) {
       var item = localImages[i % localImages.length];
@@ -277,7 +275,6 @@
     }
     container.appendChild(frag);
 
-    // Initialize tiny-masonry grid
     var grid = Masonry.create('#grid', {
       gap: 10,
       columnsCountBreakPoints: {
@@ -295,7 +292,6 @@
 
     window.grid = grid;
 
-    // Infinite scroll
     var isLoading = false;
     function loadMore(n) {
       var newEls = [];

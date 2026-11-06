@@ -1,0 +1,50 @@
+# tiny-masonry
+
+> Zero-dependency, fast masonry layout engine for JavaScript. Under 5KB gzipped with Pinterest-style waterfall layout, responsive columns, and virtual scrolling without jQuery.
+
+## Links
+- Homepage: https://masonry.devchauhan.in
+- npm package: https://www.npmjs.com/package/tiny-masonry
+- GitHub repository: https://github.com/dqev/tiny-masonry
+- CDN bundle: https://unpkg.com/tiny-masonry/masonry.min.js
+- Full API Reference: https://unpkg.com/tiny-masonry/masonry.md
+
+## Installation
+```bash
+npm install tiny-masonry
+```
+
+Direct script tag:
+```html
+<script src="https://unpkg.com/tiny-masonry/masonry.min.js"></script>
+```
+
+## Quick Start (HTML Auto-Init)
+```html
+<div data-masonry data-masonry-gap="12" data-masonry-columns="3">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+```
+
+## Quick Start (JavaScript API)
+```javascript
+import Masonry from 'tiny-masonry';
+
+const grid = Masonry.create('#grid', {
+  gap: 12,
+  columnsCountBreakPoints: { 0: 1, 600: 2, 900: 3, 1200: 4 },
+  virtualRender: true,
+  transitionDuration: '0.2s'
+});
+```
+
+## Key API Methods
+- `grid.addItems(arrayOfElements)`: Append new elements to grid
+- `grid.prepend(arrayOfElements)`: Prepend elements to beginning
+- `grid.removeItem(element)`: Remove card from layout
+- `grid.filter(selectorOrFn)`: Filter visible items
+- `grid.sort(attrOrComparator)`: Sort items
+- `grid.refresh()`: Recalculate layout
+- `grid.destroy()`: Tear down instance and observers
