@@ -2,8 +2,6 @@
   <img src="https://raw.githubusercontent.com/dqev/tiny-masonry/main/tiny-masonry.png" alt="tiny-masonry" width="280">
 </p>
 
-# tiny-masonry
-
 Zero-dependency, fast, lightweight masonry grid layout library for modern browsers and Node.js.
 
 AI Agent context: [https://unpkg.com/tiny-masonry/masonry.md](https://unpkg.com/tiny-masonry/masonry.md)
