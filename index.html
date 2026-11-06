@@ -175,31 +175,22 @@
   </script>
 
   <script>
-    var imageItems = [
-      { w: 600, h: 420, id: 10 },
-      { w: 500, h: 720, id: 16 },
-      { w: 550, h: 380, id: 28 },
-      { w: 480, h: 640, id: 37 },
-      { w: 520, h: 520, id: 42 },
-      { w: 600, h: 820, id: 54 },
-      { w: 540, h: 360, id: 63 },
-      { w: 500, h: 660, id: 71 },
-      { w: 520, h: 420, id: 82 },
-      { w: 460, h: 620, id: 93 },
-      { w: 580, h: 390, id: 104 },
-      { w: 490, h: 700, id: 115 },
-      { w: 510, h: 510, id: 126 },
-      { w: 600, h: 760, id: 137 },
-      { w: 530, h: 380, id: 148 },
-      { w: 470, h: 630, id: 159 },
-      { w: 520, h: 440, id: 170 },
-      { w: 480, h: 680, id: 181 },
-      { w: 540, h: 360, id: 192 },
-      { w: 500, h: 600, id: 203 }
+    var localImages = [
+      { src: 'images/1.jpg', w: 600, h: 400 },
+      { src: 'images/2.jpg', w: 500, h: 750 },
+      { src: 'images/3.jpg', w: 550, h: 380 },
+      { src: 'images/4.jpg', w: 480, h: 640 },
+      { src: 'images/5.jpg', w: 500, h: 500 },
+      { src: 'images/6.jpg', w: 600, h: 850 },
+      { src: 'images/7.jpg', w: 540, h: 360 },
+      { src: 'images/8.jpg', w: 500, h: 680 },
+      { src: 'images/9.jpg', w: 520, h: 420 },
+      { src: 'images/10.jpg', w: 460, h: 620 },
+      { src: 'images/11.jpg', w: 580, h: 390 },
+      { src: 'images/12.jpg', w: 500, h: 700 }
     ];
 
     var container = document.getElementById('grid');
-    var count = 0;
 
     function createImgCard(item) {
       var card = document.createElement('div');
@@ -208,7 +199,7 @@
       card.style.aspectRatio = item.w + ' / ' + item.h;
 
       var img = document.createElement('img');
-      img.src = 'https://picsum.photos/id/' + item.id + '/' + Math.round(item.w / 1.4) + '/' + Math.round(item.h / 1.4);
+      img.src = item.src;
       img.alt = '';
       img.loading = 'lazy';
 
@@ -222,12 +213,16 @@
       return card;
     }
 
-    // Seed initial 20 images
+    function getRandomImage() {
+      return localImages[Math.floor(Math.random() * localImages.length)];
+    }
+
+    // Seed initial 24 images
     var frag = document.createDocumentFragment();
-    imageItems.forEach(function (item) {
-      count++;
+    for (var i = 0; i < 24; i++) {
+      var item = localImages[i % localImages.length];
       frag.appendChild(createImgCard(item));
-    });
+    }
     container.appendChild(frag);
 
     // Initialize tiny-masonry grid
@@ -255,14 +250,8 @@
       var batchFrag = document.createDocumentFragment();
 
       for (var i = 0; i < n; i++) {
-        var base = imageItems[count % imageItems.length];
-        count++;
-        var nextItem = {
-          w: base.w,
-          h: base.h,
-          id: ((base.id + count * 9) % 300) + 10
-        };
-        var el = createImgCard(nextItem);
+        var randomItem = getRandomImage();
+        var el = createImgCard(randomItem);
         batchFrag.appendChild(el);
         newEls.push(el);
       }
