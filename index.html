@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tiny-masonry: Lightweight JavaScript Masonry Grid</title>
-  <meta name="description" content="Zero-dependency, fast, lightweight masonry grid layout engine for JavaScript. Under 5KB gzipped, responsive, with virtual scrolling." />
+  <title>tiny-masonry</title>
+  <meta name="description" content="Zero-dependency, fast masonry layout engine for JavaScript. Under 5KB gzipped." />
   <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url('InterVariable.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -15,94 +23,73 @@
     body {
       background: #ffffff;
       color: #000000;
-      font-family: "SF Pro Rounded", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      letter-spacing: -0.015em;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 20px;
+      font-weight: 470;
+      font-variant-numeric: tabular-nums;
+      -webkit-font-smoothing: antialiased;
       padding: 0;
       margin: 0;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
     }
 
     header.hero {
-      width: 100%;
-      padding: 64px 24px 44px 24px;
-      max-width: 1200px;
+      text-align: center;
+      max-width: 580px;
       margin: 0 auto;
-    }
-
-    .badge-wrap {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #f0f0f0;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #555555;
-      margin-bottom: 16px;
-    }
-
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      background: #000000;
-      border-radius: 50%;
+      padding: 72px 20px 44px;
     }
 
     h1.title {
-      font-size: clamp(38px, 6vw, 68px);
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 1.05;
-      margin-bottom: 16px;
+      font-size: 32px;
+      line-height: 38px;
+      font-weight: 530;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
       color: #000000;
     }
 
-    p.subtitle {
-      font-size: clamp(17px, 2.2vw, 21px);
-      line-height: 1.45;
+    p.desc {
+      font-size: 15px;
+      line-height: 20px;
+      font-weight: 470;
       color: #555555;
-      max-width: 680px;
-      margin-bottom: 28px;
-      font-weight: 400;
+      margin-bottom: 22px;
     }
 
     .actions {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
       gap: 10px;
-      margin-bottom: 32px;
+      flex-wrap: wrap;
     }
 
-    .install-pill {
+    .pill {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       background: #000000;
       color: #ffffff;
-      padding: 10px 18px;
+      padding: 8px 14px;
       border-radius: 6px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      font-weight: 470;
       cursor: pointer;
       user-select: none;
-      transition: opacity 0.15s ease;
+      border: none;
     }
 
-    .install-pill:hover {
-      opacity: 0.88;
+    .pill:hover {
+      opacity: 0.9;
     }
 
-    .install-copy {
+    .pill-copy {
       font-size: 11px;
+      color: #888888;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      background: #222222;
-      padding: 2px 7px;
-      border-radius: 4px;
-      color: #aaaaaa;
     }
 
     .btn {
@@ -110,11 +97,12 @@
       align-items: center;
       background: #f0f0f0;
       color: #000000;
-      padding: 10px 16px;
+      padding: 8px 14px;
       border-radius: 6px;
       text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 15px;
+      line-height: 20px;
+      font-weight: 470;
       transition: background 0.15s ease;
     }
 
@@ -122,167 +110,45 @@
       background: #e4e4e4;
     }
 
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px 24px;
-      padding-top: 18px;
-      border-top: 1px solid #f0f0f0;
-    }
-
-    .stat-item {
-      font-size: 13px;
-      color: #666666;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .stat-item b {
-      color: #000000;
-      font-weight: 600;
-    }
-
-    main.demo-section {
+    main.grid-wrap {
       width: 100%;
-      padding: 0 24px 64px 24px;
-    }
-
-    .demo-header {
-      max-width: 1200px;
-      margin: 0 auto 16px auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .demo-label {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-weight: 600;
-      color: #888888;
-    }
-
-    .demo-counter {
-      font-size: 13px;
-      color: #888888;
-      font-family: ui-monospace, SFMono-Regular, monospace;
+      padding: 0 20px 60px;
     }
 
     #grid {
       width: 100%;
-      margin: 0 auto;
     }
 
     .card {
       background: #e7e7e7;
       border-radius: 6px;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 16px;
-      color: #777777;
-      font-size: 13px;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .card:hover {
-      background: #dedede;
-    }
-
-    .card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: ui-monospace, SFMono-Regular, monospace;
-      font-size: 11px;
-      color: #999999;
-    }
-
-    .card-mid {
-      font-size: 14px;
-      font-weight: 500;
-      color: #444444;
-      line-height: 1.35;
-    }
-
-    .card-span-badge {
-      display: inline-block;
-      background: #d4d4d4;
-      color: #222222;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .card-dim {
-      font-family: ui-monospace, SFMono-Regular, monospace;
-      font-size: 11px;
-      color: #aaaaaa;
-    }
-
-    .loading-hint {
-      text-align: center;
-      padding: 32px 0;
-      color: #999999;
-      font-size: 13px;
     }
   </style>
 </head>
 <body>
 
   <header class="hero">
-    <div class="badge-wrap">
-      <span class="badge-dot"></span>
-      <span>v0.0.2 on npm &bull; ~5.5 KB gzipped</span>
-    </div>
-
     <h1 class="title">tiny-masonry</h1>
-
-    <p class="subtitle">
-      Zero-dependency, fast, lightweight masonry grid layout engine for JavaScript.
-      Pinterest-style waterfall layouts with auto-responsive columns, column spanning, and native virtual scrolling.
+    <p class="desc">
+      Zero-dependency, fast masonry layout engine for JavaScript. Under 5KB gzipped with responsive waterfall layout and virtual scrolling.
     </p>
 
     <div class="actions">
-      <div class="install-pill" id="installPill" onclick="copyInstall()">
-        <span>npm install tiny-masonry</span>
-        <span class="install-copy" id="copyLabel">copy</span>
-      </div>
-
+      <button class="pill" id="installPill" onclick="copyInstall()">
+        <span>npm i tiny-masonry</span>
+        <span class="pill-copy" id="copyLabel">copy</span>
+      </button>
       <a href="https://github.com/dqev/tiny-masonry" class="btn" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.npmjs.com/package/tiny-masonry" class="btn" target="_blank" rel="noopener">npm</a>
-      <a href="https://unpkg.com/tiny-masonry/masonry.md" class="btn" target="_blank" rel="noopener">AI Context</a>
-    </div>
-
-    <div class="stats">
-      <div class="stat-item"><b>0</b> dependencies</div>
-      <div class="stat-item"><b>5.5 KB</b> gzipped</div>
-      <div class="stat-item"><b>Virtual</b> rendering</div>
-      <div class="stat-item"><b>Column span</b> support</div>
-      <div class="stat-item"><b>RAF</b> debounced</div>
+      <a href="https://unpkg.com/tiny-masonry/masonry.md" class="btn" target="_blank" rel="noopener">Agent Docs</a>
     </div>
   </header>
 
-  <main class="demo-section">
-    <div class="demo-header">
-      <span class="demo-label">Live Interactive Grid</span>
-      <span class="demo-counter" id="itemCounter">24 items rendered</span>
-    </div>
-
+  <main class="grid-wrap">
     <div id="grid"></div>
-
-    <div class="loading-hint" id="loadingHint">
-      Scroll down to load more cards infinitely...
-    </div>
   </main>
 
-  <!-- Load package directly from published unpkg CDN with local fallback -->
   <script src="https://unpkg.com/tiny-masonry/masonry.min.js"></script>
   <script>
     if (typeof Masonry === 'undefined') {
@@ -291,90 +157,48 @@
   </script>
 
   <script>
-    // Sizing palette: larger cards for a clear, dramatic waterfall view
-    var cardHeights = [200, 260, 320, 380, 440, 500, 240, 360, 420, 480, 280, 340];
-    var cardIndex = 0;
+    var heights = [140, 180, 220, 260, 300, 160, 200, 240, 280, 170, 210, 250, 290];
 
-    function createCard(id) {
-      var h = cardHeights[Math.floor(Math.random() * cardHeights.length)];
+    function makeCard() {
       var el = document.createElement('div');
       el.className = 'card';
-      el.style.height = h + 'px';
-
-      // 1 in 8 cards spans 2 columns
-      var isSpan = (id % 8 === 3);
-      if (isSpan) {
-        el.setAttribute('data-masonry-span', '2');
-        h = Math.max(h, 280);
-        el.style.height = h + 'px';
-      }
-
-      var topHtml = '<div class="card-top">' +
-        '<span>#' + (id < 10 ? '0' + id : id) + '</span>' +
-        (isSpan ? '<span class="card-span-badge">span 2</span>' : '') +
-      '</div>';
-
-      var midHtml = '<div class="card-mid">' +
-        (isSpan ? 'Wide Waterfall Card' : 'Waterfall Card') +
-      '</div>';
-
-      var bottomHtml = '<div class="card-dim">' + h + 'px height</div>';
-
-      el.innerHTML = topHtml + midHtml + bottomHtml;
+      el.style.height = heights[Math.floor(Math.random() * heights.length)] + 'px';
       return el;
     }
 
     var container = document.getElementById('grid');
-    var counterEl = document.getElementById('itemCounter');
 
-    // Seed initial 24 cards
-    for (var i = 1; i <= 24; i++) {
-      cardIndex++;
-      container.appendChild(createCard(cardIndex));
+    // Seed initial cards
+    for (var i = 0; i < 28; i++) {
+      container.appendChild(makeCard());
     }
 
-    // Initialize tiny-masonry grid
     var grid = Masonry.create('#grid', {
-      gap: 14,
+      gap: 12,
       columnsCountBreakPoints: {
-        0: 1,
-        560: 2,
-        860: 3,
-        1180: 4,
-        1520: 5
+        0: 2,
+        600: 3,
+        900: 4,
+        1200: 5,
+        1600: 6
       },
-      transitionDuration: '0.25s',
+      transitionDuration: 0,
       virtualRender: false
     });
 
-    // Update item counter
-    function updateCounter() {
-      if (counterEl) {
-        counterEl.textContent = cardIndex + ' items rendered';
-      }
-    }
-
-    // Infinite scroll generator
+    // Infinite scroll
     var isLoading = false;
-    function addBatch(count) {
-      var newElements = [];
-      var fragment = document.createDocumentFragment();
-
-      for (var k = 0; k < count; k++) {
-        cardIndex++;
-        var card = createCard(cardIndex);
-        fragment.appendChild(card);
-        newElements.push(card);
+    function addBatch(n) {
+      var els = [];
+      for (var k = 0; k < n; k++) {
+        els.push(makeCard());
       }
-
-      container.appendChild(fragment);
-      grid.addItems(newElements);
-      updateCounter();
+      grid.addItems(els);
     }
 
     window.addEventListener('scroll', function () {
       if (isLoading) return;
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 400) {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
         isLoading = true;
         addBatch(12);
         setTimeout(function () {
@@ -383,14 +207,13 @@
       }
     }, { passive: true });
 
-    // Copy install command helper
     function copyInstall() {
-      var text = 'npm install tiny-masonry';
+      var text = 'npm i tiny-masonry';
       var label = document.getElementById('copyLabel');
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function () {
           if (label) {
-            label.textContent = 'copied!';
+            label.textContent = 'copied';
             setTimeout(function () { label.textContent = 'copy'; }, 1800);
           }
         });
@@ -402,7 +225,7 @@
         document.execCommand('copy');
         document.body.removeChild(input);
         if (label) {
-          label.textContent = 'copied!';
+          label.textContent = 'copied';
           setTimeout(function () { label.textContent = 'copy'; }, 1800);
         }
       }
