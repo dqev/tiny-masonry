@@ -15,7 +15,7 @@
     }
 
     :root {
-      --gap: 16px;
+      --gap: 10px;
     }
 
     * {
@@ -119,8 +119,7 @@
 
     main.grid-wrap {
       width: 100%;
-      max-width: 1600px;
-      margin: 0 auto;
+      margin: 0;
       padding: 0 0 60px;
     }
 
@@ -233,13 +232,15 @@
 
     // Initialize tiny-masonry grid
     var grid = Masonry.create('#grid', {
-      gap: 16,
+      gap: 10,
       columnsCountBreakPoints: {
         0: 1,
-        480: 2,
-        768: 3,
-        1100: 4,
-        1440: 5
+        440: 2,
+        720: 3,
+        1040: 4,
+        1380: 5,
+        1720: 6,
+        2060: 7
       },
       transitionDuration: '0.2s',
       virtualRender: false
