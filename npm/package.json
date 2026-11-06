@@ -1,6 +1,6 @@
 {
   "name": "tiny-masonry",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Zero-dependency masonry grid layout engine for JavaScript. Under 5KB, fast, responsive, with virtual scrolling. Pinterest-style layouts without jQuery.",
   "main": "masonry.min.js",
   "unpkg": "masonry.min.js",

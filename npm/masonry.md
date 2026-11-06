@@ -2,7 +2,7 @@
 
 Machine-readable reference for AI coding agents and LLMs.
 Direct CDN URL: https://unpkg.com/tiny-masonry/masonry.md
-Package: tiny-masonry (v0.0.1)
+Package: tiny-masonry (v0.0.2)
 Repository: https://github.com/dqev/tiny-masonry
 
 ## Overview

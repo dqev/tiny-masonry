@@ -985,6 +985,6 @@
     detectAspectRatio: detectAspectRatio,
     waitForAspectRatio: waitForAspectRatio,
     initAll: autoInit,
-    version: '0.0.1'
+    version: '0.0.2'
   };
 });
